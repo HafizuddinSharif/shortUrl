@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
 const ShortUrlSchema = new mongoose.Schema({
   url: {
@@ -15,4 +16,4 @@ const ShortUrlSchema = new mongoose.Schema({
   }
 });
 
-module.exports = Book = mongoose.model('ShortUrl', ShortUrlSchema);
+module.exports = ShortUrl = mongoose.model('ShortUrl', ShortUrlSchema);

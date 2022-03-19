@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
 const ClickSchema = new mongoose.Schema({
   shortUrl: {
@@ -6,8 +7,8 @@ const ClickSchema = new mongoose.Schema({
     ref: 'ShortUrl',
   },
   geolocation: {
-    type: Geolocation,
-    required: true
+    type: String,
+    // required: true
   },
   timestamp: {
       type: Date,
