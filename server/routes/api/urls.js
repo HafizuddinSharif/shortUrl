@@ -6,35 +6,56 @@ const OriginalUrl = require('../../models/OriginalUrl')
 const ShortUrl = require('../../models/ShortUrl')
 const Click = require('../../models/Click')
 
+const randomstring = require('randomstring')
+
 // @route GET api/test
 router.get('/test', (req, res) => res.send('url route testing!'))
 
 // @route
 // @description get all shortUrls
-router.get('/short', (req, res) => {
-    ShortUrl.find()
-    .then(shorts => res.json(shorts))
-    .catch(err => res.statusCode)
+router.get('/short', async (req, res) => {
+    
+    const response = await ShortUrl.find()
+    res.send(response)
 })
 
-router.get('/short/add', (req, res) => {
+// @route
+// @description get all originalUrls
+router.get('/original', async (req, res) => {
+    
+    const response = await OriginalUrl.find()
+    res.send(response)
+})
 
-    const short = new ShortUrl({
-        url: 'https://anotherlink:8080'
+router.get('/deleteAll', async (req, res) => {
+
+    const response = await ShortUrl.deleteMany()
+    res.send(response)
+})
+
+router.post('/short/add', (req, res) => {
+
+    const randomString = randomstring.generate(5)
+
+    const originalUrl = new OriginalUrl({
+        url: req.body.url,
     })
 
-    short.save( () => {
+    originalUrl.save(e => {
+        if (e) return handleError(e)
 
+        const shortUrl = new ShortUrl({
+            title: req.body.title,
+            url: `http://localhost:8080/${randomString}`,
+            originalUrl: originalUrl._id
+        })
+
+        shortUrl.save( e => {
+            if (e) return handleError(e)
+        })
     })
 
-    // ShortUrl.create({
-    //     url: 'https://anotherlink:8080'
-    // }, (err, small) => {
-    //     if (err) return handleError(err)
-    // })
-
-    res.redirect('/urls/test')
-
+    res.send("Successfully added")
 
 })
 

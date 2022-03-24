@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const OriginalUrlSchema = new mongoose.Schema({
-  titleTag: {
-    type: String,
-    required: true,
-  },
   url: {
     type: String,
     required: true

@@ -6,6 +6,10 @@ const ShortUrlSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
   clickInfos: [{
     type: Schema.Types.ObjectId,
     ref: 'Click'
