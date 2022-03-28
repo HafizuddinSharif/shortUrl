@@ -2,24 +2,24 @@
 
 ## Setup
 
-'''
+```
 // ./client
 npm install
 
 // ./server
 npm install
 
-'''
+```
 
 ## Running the program
 
-'''
+```
 // ./client
 npm run start
 
 // ./server
 npm run app
-'''
+```
 
 ## The problem
 
